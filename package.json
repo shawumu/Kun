@@ -1,0 +1,27 @@
+{
+  "name": "kun",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js -s source/code.js -o out"
+  },
+  "dependencies": {
+    "acorn": "^6.4.2",
+    "chai": "^4.3.4",
+    "commander": "^8.3.0",
+    "escodegen": "^1.14.3",
+    "esprima": "^4.0.1",
+    "random-word": "^2.0.0"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier-eslint": "^13.0.0"
+  }
+}
