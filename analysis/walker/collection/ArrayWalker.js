@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const NodeWalker = require("./NodeWalker");
 
-class ArrayWalker extends NodeWalker {
+class AttrAsListWalker extends NodeWalker {
   attr = "";
 
   walk(syntaxNode, { syntaxStack }) {
@@ -14,16 +14,25 @@ class ArrayWalker extends NodeWalker {
   }
 }
 
-class BlockStatement extends ArrayWalker {
+class BlockStatement extends AttrAsListWalker {
   attr = "body";
 }
 
-class VariableDeclaration extends ArrayWalker {
+class VariableDeclaration extends AttrAsListWalker {
   attr = "declarations";
 }
 
-class ObjectExpression extends ArrayWalker {
+class ObjectExpression extends AttrAsListWalker {
   attr = "properties";
 }
 
-module.exports = { BlockStatement, VariableDeclaration, ObjectExpression };
+class ArrayExpression extends AttrAsListWalker {
+  attr = "elements";
+}
+
+module.exports = {
+  BlockStatement,
+  VariableDeclaration,
+  ObjectExpression,
+  ArrayExpression
+};

@@ -13,5 +13,6 @@ class SideWalker extends NodeWalker {
 
 class BinaryExpression extends SideWalker {}
 class AssignmentExpression extends SideWalker {}
+class LogicalExpression extends SideWalker {}
 
-module.exports = { BinaryExpression, AssignmentExpression };
+module.exports = { BinaryExpression, AssignmentExpression, LogicalExpression };

@@ -27,10 +27,20 @@ class Property extends AttributeWaler {
   attr = "value";
 }
 
+class UnaryExpression extends AttributeWaler {
+  attr = "argument";
+}
+
+class ExpressionStatement extends AttributeWaler {
+  attr = "expression";
+}
+
 module.exports = {
   FunctionDeclaration,
   FunctionExpression,
   ReturnStatement,
   VariableDeclarator,
+  UnaryExpression,
+  ExpressionStatement,
   Property
 };

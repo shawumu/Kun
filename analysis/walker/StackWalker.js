@@ -6,17 +6,20 @@ const CallExpression = require("./CallExpression");
 
 const {
   BinaryExpression,
-  AssignmentExpression
+  AssignmentExpression,
+  LogicalExpression
 } = require("./collection/SideWalker");
 const {
   BlockStatement,
   VariableDeclaration,
-  ObjectExpression
+  ObjectExpression,
+  ArrayExpression
 } = require("./collection/ArrayWalker");
 const {
   Identifier,
   Literal,
-  MemberExpression
+  MemberExpression,
+  ThisExpression
 } = require("./collection/EmptyWorker");
 
 const {
@@ -24,8 +27,13 @@ const {
   FunctionDeclaration,
   ReturnStatement,
   VariableDeclarator,
-  Property
+  UnaryExpression,
+  Property,
+  ExpressionStatement
 } = require("./collection/AttributeWaler");
+
+const { ConditionalExpression } = require("./collection/ConditionWalker");
+const { ForStatement } = require("./collection/MultiAttrWalker");
 
 class StackWalker extends NodeWalker {
   constructor(plugins) {
@@ -40,6 +48,13 @@ class StackWalker extends NodeWalker {
       CallExpression: new CallExpression(),
       Identifier: new Identifier(),
       Literal: new Literal(),
+      ForStatement: new ForStatement(),
+      ExpressionStatement: new ExpressionStatement(),
+      LogicalExpression: new LogicalExpression(),
+      ThisExpression: new ThisExpression(),
+      ConditionalExpression: new ConditionalExpression(),
+      ArrayExpression: new ArrayExpression(),
+      UnaryExpression: new UnaryExpression(),
       MemberExpression: new MemberExpression(),
       VariableDeclaration: new VariableDeclaration(),
       VariableDeclarator: new VariableDeclarator(),
@@ -76,6 +91,7 @@ class StackWalker extends NodeWalker {
 
   walkSingleNode(syntaxNode) {
     const handler = this.handlerMap[syntaxNode.type];
+
     expect(handler, `handler : ${syntaxNode.type}`).to.not.be.undefined;
     this.evtCenter.emit("node.walk.before", syntaxNode);
     handler.walk(syntaxNode, { syntaxStack: this.syntaxStack });
